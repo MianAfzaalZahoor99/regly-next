@@ -18,4 +18,14 @@ module.exports = {
     });
     return config;
   },
+  async redirects() {
+    return [
+      // Basic redirect
+      {
+        source: '/',
+        destination: '/auth/jwt/login',
+        permanent: true,
+      }
+    ]
+  },
 };

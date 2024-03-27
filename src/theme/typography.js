@@ -1,4 +1,4 @@
-import { Barlow, Public_Sans } from 'next/font/google';
+import { Barlow, Roboto } from 'next/font/google';
 
 // ----------------------------------------------------------------------
 
@@ -24,8 +24,8 @@ export function responsiveFontSizes({ sm, md, lg }) {
   };
 }
 
-export const primaryFont = Public_Sans({
-  weight: ['400', '500', '600', '700', '800', '900'],
+export const primaryFont = Roboto({
+  weight: ['100', '300', '400', '500', '700', '900'],
   subsets: ['latin'],
   display: 'swap',
   fallback: ['Helvetica', 'Arial', 'sans-serif'],

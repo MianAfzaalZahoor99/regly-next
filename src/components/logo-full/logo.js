@@ -9,7 +9,7 @@ import { RouterLink } from 'src/routes/components';
 
 // ----------------------------------------------------------------------
 
-const Logo = forwardRef(({ disabledLink = false, sx, ...other }, ref) => {
+const LogoFull = forwardRef(({ disabledLink = false, sx, ...other }, ref) => {
   const theme = useTheme();
 
   const PRIMARY_LIGHT = theme.palette.primary.light;
@@ -23,8 +23,8 @@ const Logo = forwardRef(({ disabledLink = false, sx, ...other }, ref) => {
   const logo = (
     <Box
       component="img"
-      src="/logo/regly-logo-resp.png"
-      sx={{ width: 80, height: 40, cursor: 'pointer', ...sx }}
+      src="/logo/regly-logo.png"
+      sx={{ width: 150, height: 80, cursor: 'pointer', ...sx }}
     />
   );
 
@@ -87,9 +87,9 @@ const Logo = forwardRef(({ disabledLink = false, sx, ...other }, ref) => {
   );
 });
 
-Logo.propTypes = {
+LogoFull.propTypes = {
   disabledLink: PropTypes.bool,
   sx: PropTypes.object,
 };
 
-export default Logo;
+export default LogoFull;

@@ -31,8 +31,10 @@ export const endpoints = {
   calendar: '/api/calendar',
   auth: {
     me: '/api/auth/me',
-    login: '/api/auth/login',
+    login: 'auth/login',
     register: '/api/auth/register',
+    verifytoken: 'auth/verify-token',
+    current: 'users/profile',
   },
   mail: {
     list: '/api/mail/list',
@@ -50,4 +52,9 @@ export const endpoints = {
     details: '/api/product/details',
     search: '/api/product/search',
   },
+  user: {
+    list: '/users',
+    details: (userId) => `/users/${userId}`,
+    delete: (userId) => `/users/${userId}`,
+  }
 };

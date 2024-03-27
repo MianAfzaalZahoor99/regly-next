@@ -51,31 +51,43 @@ const reducer = (state, action) => {
 
 // ----------------------------------------------------------------------
 
-const STORAGE_KEY = 'accessToken';
+const STORAGE_KEY = 'token';
 
 export function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const initialize = useCallback(async () => {
     try {
-      const accessToken = sessionStorage.getItem(STORAGE_KEY);
+      const token = sessionStorage.getItem(STORAGE_KEY);
 
-      if (accessToken && isValidToken(accessToken)) {
-        setSession(accessToken);
+      if (token) {
+        setSession(token);
+        const isValid = await axios.get(endpoints.auth.verifytoken);
 
-        const response = await axios.get(endpoints.auth.me);
-
-        const { user } = response.data;
-
-        dispatch({
-          type: 'INITIAL',
-          payload: {
-            user: {
-              ...user,
-              accessToken,
+        if (isValid.data.isValid) {
+  
+          const response = await axios.get(endpoints.auth.current);
+          console.log("response: ", response);
+  
+          const { user } = response.data;
+  
+          dispatch({
+            type: 'INITIAL',
+            payload: {
+              user: {
+                ...user,
+                token,
+              },
             },
-          },
-        });
+          });
+        } else {
+          dispatch({
+            type: 'INITIAL',
+            payload: {
+              user: null,
+            },
+          });
+        }
       } else {
         dispatch({
           type: 'INITIAL',
@@ -108,16 +120,16 @@ export function AuthProvider({ children }) {
 
     const response = await axios.post(endpoints.auth.login, data);
 
-    const { accessToken, user } = response.data;
+    const { token, user } = response.data;
 
-    setSession(accessToken);
+    setSession(token);
 
     dispatch({
       type: 'LOGIN',
       payload: {
         user: {
           ...user,
-          accessToken,
+          token,
         },
       },
     });
@@ -134,16 +146,16 @@ export function AuthProvider({ children }) {
 
     const response = await axios.post(endpoints.auth.register, data);
 
-    const { accessToken, user } = response.data;
+    const { token, user } = response.data;
 
-    sessionStorage.setItem(STORAGE_KEY, accessToken);
+    sessionStorage.setItem(STORAGE_KEY, token);
 
     dispatch({
       type: 'REGISTER',
       payload: {
         user: {
           ...user,
-          accessToken,
+          token,
         },
       },
     });

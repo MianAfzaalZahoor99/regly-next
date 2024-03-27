@@ -11,11 +11,12 @@ import { useResponsive } from 'src/hooks/use-responsive';
 import { useMockedUser } from 'src/hooks/use-mocked-user';
 
 import Logo from 'src/components/logo';
+import LogoFull from 'src/components/logo-full';
 import Scrollbar from 'src/components/scrollbar';
 import { NavSectionVertical } from 'src/components/nav-section';
 
 import { NAV } from '../config-layout';
-import NavUpgrade from '../common/nav-upgrade';
+// import NavUpgrade from '../common/nav-upgrade';
 import { useNavData } from './config-navigation';
 import NavToggleButton from '../common/nav-toggle-button';
 
@@ -48,7 +49,11 @@ export default function NavVertical({ openNav, onCloseNav }) {
         },
       }}
     >
-      <Logo sx={{ mt: 3, ml: 4, mb: 1 }} />
+      {lgUp ? 
+        <LogoFull sx={{ mt: 3, ml: 4, mb: 1 }} />
+        :
+        <Logo sx={{ mt: 3, ml: 4, mb: 1 }} />
+      }
 
       <NavSectionVertical
         data={navData}
@@ -59,7 +64,7 @@ export default function NavVertical({ openNav, onCloseNav }) {
 
       <Box sx={{ flexGrow: 1 }} />
 
-      <NavUpgrade />
+      {/* <NavUpgrade /> */}
     </Scrollbar>
   );
 
