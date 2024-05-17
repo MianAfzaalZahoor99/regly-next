@@ -24,6 +24,8 @@ import image1 from '../../assets/images/slide1.jpg';
 import QRCode from '../../assets/images/QRCode.png';
 import selfie from '../../assets/images/selfie.jpg';
 import Iconify from 'src/components/iconify';
+import CameraComponent from './scan-face';
+import DocumentsForm from './documents-form';
 
 const slides = [
   {
@@ -109,6 +111,14 @@ const slides = [
     description:
       'Please select the country from the drop down list and fill your identification number',
   },
+  {
+    id: 9,
+    buttonText: 'Reupload',
+  },
+  {
+    id: 10,
+    heading: 'Capture The Front Side',
+  },
 ];
 
 const MobileCarousel = () => {
@@ -167,6 +177,13 @@ const MobileCarousel = () => {
           {renderDisplayFieldOption('country', 'Country')}
         </Box>
       )}
+      {slides[activeSlide].id == 8 && (
+        <Box sx={{ display: 'flex', marginRight: 'auto', flexDirection: 'column', gap: '6px'}}>
+          {renderDisplayFieldOption('insurance', 'Insurance')}
+          {renderDisplayFieldOption('id', 'ID')}
+          {renderDisplayFieldOption('docType', 'Document Type')}
+        </Box>
+      )}
       <IconButton
         onClick={handlePrev}
         variant="contained"
@@ -185,6 +202,7 @@ const MobileCarousel = () => {
           flexDirection: 'column',
           justifyItems: 'center',
           alignItems: 'center',
+          backgroundColor: [6, 10].includes(slides[activeSlide].id) ? '#000000' : '#FFFFFF',
           padding: 2,
           gap: 3,
         }}
@@ -199,10 +217,10 @@ const MobileCarousel = () => {
           }}
         >
           <IconButton onClick={handlePrev} variant="contained" disabled={activeSlide === 0}>
-            <ArrowBack />
+            <Iconify icon="material-symbols:arrow-back-ios-rounded" />
           </IconButton>
           <LinearProgress
-            sx={{ width: '70%' }}
+            sx={{ width: '80%', backgroundColor: [6, 10].includes(slides[activeSlide].id) ? '#FFFFFF' : '', height: '8px' }}
             variant="determinate"
             value={((activeSlide + 1) / slides.length) * 100}
           />
@@ -214,8 +232,10 @@ const MobileCarousel = () => {
         <Box
           sx={{
             height: '500px',
+            minHeight: '500px',
             maxHeight: '500px',
             display: 'flex',
+            width: '100%',
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
@@ -242,7 +262,7 @@ const MobileCarousel = () => {
           ) : (
             <></>
           )}
-          <Typography variant="h5" align="center" gutterBottom>
+          <Typography variant="h5" align="center" gutterBottom sx={{ color: [6, 10].includes(slides[activeSlide].id) ? '#FFFFFF' : ''}}>
             {slides[activeSlide].heading}
           </Typography>
 
@@ -286,36 +306,32 @@ const MobileCarousel = () => {
           >
             {slides[activeSlide].description}
           </Typography>
-
-          {/* {slides[activeSlide].id == 6 && (
-            <>
-              <CameraComponent />
-            </>
-          )} */}
-
+          {slides[activeSlide].id == 6 && (
+            <CameraComponent handleNext={handleNext} />
+          )}
           {slides[activeSlide].id == 8 && (
-            <Box
-            sx={{
-                  width: '100%',
-                }}>
-              <FormControl sx={{
-                  width: '100%',
-                }}>
-                <InputLabel>Insurance</InputLabel>
-                <Select label="Insurance">
-                  {countries.map((country, i) => (
-                    <MenuItem key={i} value={country.name}>
-                        {country.name}
-                      </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Box>
+            <DocumentsForm countries={countries} addedFields={addedFields}/>
+          )}
+          {slides[activeSlide].id == 9 && (
+            <>
+              <Box sx={{ display: 'flex', alignItems: 'center', marginTop: '30px', justifyContent: 'center', backgroundColor: '#000000', width: '300px', height: '230px', borderRadius: '20px'}}>
+                <Iconify icon="uiw:warning" style={{ color: 'EE416F' }} />
+              </Box>
+              <Box sx={{display: 'flex', alignItems:'center', flexDirection: 'column', marginTop: '30px', marginBottom: 'auto'}}>
+                <Typography sx={{ fontSize: '14px', color: '#637381' }}>Blur/focus Issue</Typography>
+                <Typography sx={{ fontSize: '14px', color: '#637381' }}>Light too high/low</Typography>
+                <Typography sx={{ fontSize: '14px', color: '#637381' }}>Image size is too large/small</Typography>
+              </Box>
+            </>
+          )}
+          {slides[activeSlide].id == 10 && (
+            <Box></Box>
           )}
         </Box>
         <Button
           sx={{
             width: 150,
+            opacity: [6, 10].includes(slides[activeSlide].id) ? 0 : 1
           }}
           variant="contained"
           color="primary"
@@ -329,7 +345,7 @@ const MobileCarousel = () => {
       <IconButton
         onClick={handleNext}
         variant="contained"
-        sx={{marginRight: slides[activeSlide].id == 5 ? '26%' : ''}}
+        sx={{marginRight: [5, 8].includes(slides[activeSlide].id) ? '26%' : ''}}
         disabled={activeSlide === slides.length - 1}
         // sx={{ position: 'absolute', top: '50%', right: '8px', transform: 'translateY(-50%)' }}
       >

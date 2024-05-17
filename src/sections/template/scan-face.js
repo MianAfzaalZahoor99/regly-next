@@ -1,6 +1,8 @@
+import { Box, Typography } from '@mui/material';
 import React, { useRef, useState, useEffect } from 'react';
+import Iconify from 'src/components/iconify';
 
-const CameraComponent = () => {
+const CameraComponent = ({handleNext}) => {
   const videoRef = useRef();
   const canvasRef = useRef();
   const [imageData, setImageData] = useState(null);
@@ -19,7 +21,7 @@ const CameraComponent = () => {
 
     return () => {
       // Cleanup - stop the video stream when component unmounts
-      const stream = videoRef.current.srcObject;
+      const stream = videoRef?.current?.srcObject;
       if (stream) {
         const tracks = stream.getTracks();
         tracks.forEach((track) => {
@@ -37,8 +39,8 @@ const CameraComponent = () => {
   };
 
   return (
-    <div>
-      <video
+    <Box sx={{ width: '100px', display: 'flex', flexDirection: 'column', alignItems: "center" }}>
+      {/* <video
         style={{
             // borderRadius : "1000px",
             // width : "200px",
@@ -47,11 +49,17 @@ const CameraComponent = () => {
         ref={videoRef}
         autoPlay
         playsInline
-      />
+      /> */}
+      <Iconify icon="gala:portrait2" style={{ width: '150px', height: '150px', margin: '50px 0px 20px 0px'}} />
+      <Box sx={{display: 'flex', alignItems: 'center', gap: '12px', width: 'auto', marginBottom: '40px'}}>
+        <Iconify icon="uiw:warning" style={{ color: 'EE416F', margin: '20px 0px' }} />
+        <Typography sx={{width: '100%', display: 'flex', alignItems: 'center', color: '#FFFFFF', fontSize: '14px', textWrap: 'nowrap'}}>Please try again</Typography>
+      </Box>
+      <Iconify icon="ph:radio-button-fill" style={{ color: '#EE416F', width: '100px', height: '100px'}} onClick={handleNext} />
       {/* <button onClick={handleCapture}>Take Picture</button>
       {imageData && <img src={imageData} alt="Captured" />} */}
       <canvas ref={canvasRef} style={{ display: 'none' }} width="640" height="480" />
-    </div>
+    </Box>
   );
 };
 
