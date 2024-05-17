@@ -12,6 +12,7 @@ const ROOTS = {
   AUTH: '/auth',
   AUTH_DEMO: '/auth-demo',
   DASHBOARD: '/dashboard',
+  SETTINGS: '/dashboard/settings',
 };
 
 // ----------------------------------------------------------------------
@@ -60,7 +61,8 @@ export const paths = {
       forgotPassword: `${ROOTS.AUTH}/amplify/forgot-password`,
     },
     jwt: {
-      login: `${ROOTS.AUTH}/jwt/login`,
+      // login: `${ROOTS.AUTH}/jwt/login`,
+      login: '/',
       register: `${ROOTS.AUTH}/jwt/register`,
     },
     firebase: {
@@ -99,6 +101,15 @@ export const paths = {
   // DASHBOARD
   dashboard: {
     root: ROOTS.DASHBOARD,
+    settings: ROOTS.SETTINGS,
+    team: `${ROOTS.SETTINGS}/team`,
+    audit: `${ROOTS.SETTINGS}/audit`,
+    template: {
+      root: `${ROOTS.DASHBOARD}/template`,
+      customization: `${ROOTS.DASHBOARD}/template/customization`,
+      acceptableCountries: `${ROOTS.DASHBOARD}/template/acceptableCountries`,
+      acceptableIdTypes: `${ROOTS.DASHBOARD}/template/acceptableIdTypes`,
+    },
     mail: `${ROOTS.DASHBOARD}/mail`,
     chat: `${ROOTS.DASHBOARD}/chat`,
     blank: `${ROOTS.DASHBOARD}/blank`,
@@ -125,6 +136,10 @@ export const paths = {
       demo: {
         edit: `${ROOTS.DASHBOARD}/user/${MOCK_ID}/edit`,
       },
+    },
+    settings: {
+      root: `${ROOTS.DASHBOARD}/settings`,
+      team: `${ROOTS.DASHBOARD}/settings/team`,
     },
     product: {
       root: `${ROOTS.DASHBOARD}/product`,

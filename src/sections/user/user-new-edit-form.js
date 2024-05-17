@@ -34,7 +34,6 @@ import FormProvider, {
 
 export default function UserNewEditForm({ currentUser }) {
   const router = useRouter();
-
   const { enqueueSnackbar } = useSnackbar();
 
   const NewUserSchema = Yup.object().shape({

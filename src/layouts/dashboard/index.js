@@ -75,6 +75,7 @@ export default function DashboardLayout({ children }) {
           flexDirection: { xs: 'column', lg: 'row' },
         }}
       >
+
         {renderNavVertical}
 
         <Main>{children}</Main>

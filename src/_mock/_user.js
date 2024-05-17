@@ -155,3 +155,17 @@ export const _userList = [...Array(20)].map((_, index) => ({
   status:
     (index % 2 && 'pending') || (index % 3 && 'banned') || (index % 4 && 'rejected') || 'active',
 }));
+
+// export const _teamList = [...Array(20)].map((_, index) => ({
+//   id: _mock.id(index),
+//   member: _mock.member(index),
+//   role: _mock.role(index),
+//   email: _mock.email(index),
+//   lastlogin: _mock.lastlogin(index),
+//   name: _mock.fullName(index),
+//   isVerified: _mock.boolean(index),
+
+//   avatarUrl: _mock.image.avatar(index),
+//   phoneNumber: _mock.phoneNumber(index),
+//   status: (index % 2 && 'offline') || (index % 3 && 'online'),
+// }));

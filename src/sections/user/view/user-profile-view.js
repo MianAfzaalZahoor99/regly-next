@@ -87,6 +87,7 @@ export default function UserProfileView() {
           height: 290,
         }}
       >
+        
         <ProfileCover
           role={_userAbout.role}
           name={user?.displayName}

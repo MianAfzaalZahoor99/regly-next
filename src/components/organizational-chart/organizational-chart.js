@@ -51,6 +51,7 @@ OrganizationalChart.propTypes = {
 
 export function List({ data, depth, variant, sx }) {
   const hasChild = data.children && !!data.children;
+  // const hasChild = data.children !== undefined && !!data.children;
 
   return (
     <TreeNode

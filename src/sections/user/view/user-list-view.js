@@ -22,7 +22,6 @@ import { RouterLink } from 'src/routes/components';
 import { useBoolean } from 'src/hooks/use-boolean';
 
 import { _roles, _userList, USER_STATUS_OPTIONS } from 'src/_mock';
-import { useGetUsers } from 'src/api/users';
 
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';

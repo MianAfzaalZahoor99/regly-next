@@ -4,8 +4,6 @@ import { paths } from 'src/routes/paths';
 
 import { useTranslate } from 'src/locales';
 
-import Label from 'src/components/label';
-import Iconify from 'src/components/iconify';
 import SvgColor from 'src/components/svg-color';
 
 // ----------------------------------------------------------------------
@@ -107,6 +105,30 @@ export function useNavData() {
               { title: t('create'), path: paths.dashboard.user.new },
               { title: t('edit'), path: paths.dashboard.user.demo.edit },
               { title: t('account'), path: paths.dashboard.user.account },
+            ],
+          },
+
+          {
+            title: t('settings'),
+            path: paths.dashboard.settings.root,
+            icon: ICONS.user,
+            children: [
+              { title: t('profile'), path: paths.dashboard.settings.root },
+              { title: t('team'), path: paths.dashboard.team },
+              { title: t('audit logs'), path: paths.dashboard.audit },
+            ],
+          },
+          {
+            title: t('template'),
+            path: paths.dashboard.template.root,
+            icon: ICONS.user,
+            children: [
+              { title: t('customization'), path: paths.dashboard.template.customization },
+              {
+                title: t('acceptable country types'),
+                path: paths.dashboard.template.acceptableCountries,
+              },
+              { title: t('acceptable ID types'), path: paths.dashboard.template.acceptableIdTypes },
             ],
           },
 

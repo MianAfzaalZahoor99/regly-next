@@ -77,6 +77,8 @@ export default function NavVertical({ openNav, onCloseNav }) {
     >
       <NavToggleButton />
 
+      
+
       {lgUp ? (
         <Stack
           sx={{
@@ -87,6 +89,7 @@ export default function NavVertical({ openNav, onCloseNav }) {
           }}
         >
           {renderContent}
+          
         </Stack>
       ) : (
         <Drawer
@@ -99,7 +102,9 @@ export default function NavVertical({ openNav, onCloseNav }) {
           }}
         >
           {renderContent}
+          sdafd
         </Drawer>
+  
       )}
     </Box>
   );
