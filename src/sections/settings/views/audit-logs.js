@@ -2,11 +2,9 @@
 
 import React from 'react';
 
-import { useTheme } from '@mui/material/styles';
 import {
   Box,
   Card,
-  Grid,
   Button,
   Container,
   TextField,
@@ -14,8 +12,6 @@ import {
 } from '@mui/material';
 
 import { paths } from 'src/routes/paths';
-
-import { useMockedUser } from 'src/hooks/use-mocked-user';
 
 import { useSettingsContext } from 'src/components/settings';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs/custom-breadcrumbs';
@@ -25,21 +21,7 @@ import { auditTableData } from '../audit/audit-data';
 import Iconify from 'src/components/iconify';
 
 const AuditLogs = () => {
-  const theme = useTheme();
   const settings = useSettingsContext();
-
-  const { user } = useMockedUser();
-
-  // const formatDataForCSV = (data) => {
-  //   return data.map((item) => ({
-  //     Description: item.description,
-  //     Username: item.username,
-  //     'User Type': item.userType,
-  //     'Audit Duration': item.auditDuration,
-  //     Category: item.category,
-  //     Action: item.action,
-  //   }));
-  // };
 
   const convertToCSV = (data) => {
     const header = `${Object.keys(data[0]).join(',')  }\n`;
@@ -60,12 +42,7 @@ const AuditLogs = () => {
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
-      <Container
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-        }}
-      >
+      <Container sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <CustomBreadcrumbs
           heading="Audit Logs"
           links={[
@@ -73,9 +50,7 @@ const AuditLogs = () => {
             { name: 'Audit', href: paths.dashboard.audit },
             { name: 'audit' },
           ]}
-          sx={{
-            mb: { xs: 3, md: 5 },
-          }}
+          sx={{ mb: { xs: 3, md: 5 } }}
         />
       </Container>
       <Card sx={{p: 2, mb: 2}}>
@@ -108,6 +83,10 @@ const AuditLogs = () => {
               color: '#ee416f',
               backgroundColor: '#ee416f14',
               marginLeft: 'auto',
+              '&:hover': {
++                backgroundColor: '#ee416f',
++                color: '#FFFFFF'
++              }
             }}
           >
             Search
@@ -121,6 +100,10 @@ const AuditLogs = () => {
               color: '#ee416f',
               gap: '12px',
               backgroundColor: '#ee416f14',
+              '&:hover': {
++                backgroundColor: '#ee416f',
++                color: '#FFFFFF'
++              }
             }}
             startIcon={<Iconify icon="foundation:page-export-csv" />}
           >
@@ -128,20 +111,7 @@ const AuditLogs = () => {
           </Button>
         </Box>
       </Card>
-        {/* <CSVLink
-          data={formatDataForCSV(auditTableData)}
-          filename={'audit-logs.csv'}
-          style={{color :'red'}}
-        >
-          Export CSV
-        </CSVLink> */}
-
-      <Card
-        sx={{
-          mb: 3,
-          p: 2,
-        }}
-      >
+      <Card sx={{ mb: 3, p: 2 }}>
         <AuditTable auditData={auditTableData} />
       </Card>
     </Container>
