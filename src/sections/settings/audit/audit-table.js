@@ -5,11 +5,9 @@ import React, { useState } from 'react';
 import {
   Table,
   TableRow,
-  Container,
   TableBody,
   TableCell,
   TableHead,
-  TableContainer,
   TablePagination,
   Typography,
 } from '@mui/material';
@@ -22,7 +20,7 @@ const AuditTable = ({ auditData }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(rowsPerPageOptions[0]);
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (_, newPage) => {
     setPage(newPage);
   };
 
@@ -68,6 +66,10 @@ const AuditTable = ({ auditData }) => {
                   border: `1px solid #EE416F14`,
                   backgroundColor: '#EE416F14',
                   color: '#EE416F',
++                 '&:hover': {
++                   backgroundColor: '#ee416f',
++                   color: '#FFFFFF'
++                 }
                 }}>{row.userType}</Typography>
               </TableCell>
               <TableCell>{row.auditDuration}</TableCell>
@@ -84,7 +86,11 @@ const AuditTable = ({ auditData }) => {
                     fontSize: '13px',
                     color: '#27BAB1',
                     backgroundColor: 'rgba(39, 186, 177, 0.1)',
-                    border: '1px solid rgba(39, 186, 177, 0.1)'
+                    border: '1px solid rgba(39, 186, 177, 0.1)',
++                   '&:hover': {
++                     backgroundColor: '#27BAB1',
++                     color: '#FFFFFF'
++                   }
                   }}
                 >
                   {row.action}
@@ -94,18 +100,6 @@ const AuditTable = ({ auditData }) => {
         ))}
         <TableRow />
       </TableBody>
-      {/* <TableHead>
-        <TableRow>
-          <TableCell>
-            Page {1} of {auditTableData.length}
-          </TableCell>
-          <TableCell></TableCell>
-          <TableCell>sdsdf</TableCell>
-          <TableCell></TableCell>
-          <TableCell></TableCell>
-          <TableCell>Records Per Page {5}</TableCell>
-        </TableRow>
-      </TableHead> */}
       <TableBody bg="blue">
         <TableCell colSpan={6}>
           <TablePagination
