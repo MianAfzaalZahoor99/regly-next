@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Close, ArrowBack, ArrowForward } from '@mui/icons-material';
 import {
@@ -26,6 +26,7 @@ import selfie from '../../assets/images/selfie.jpg';
 import Iconify from 'src/components/iconify';
 import CameraComponent from './scan-face';
 import DocumentsForm from './documents-form';
+import AddressForm from './address-form';
 
 const slides = [
   {
@@ -119,6 +120,19 @@ const slides = [
     id: 10,
     heading: 'Capture The Front Side',
   },
+  {
+    id: 11,
+    heading: 'Capture The Back Side',
+  },
+  {
+    id: 12,
+    buttonText: 'Next',
+  },
+  {
+    id: 13,
+    heading: 'Please enter your address details',
+    buttonText: 'Next',
+  },
 ];
 
 const MobileCarousel = () => {
@@ -128,6 +142,10 @@ const MobileCarousel = () => {
   const handleNext = () => {
     setActiveSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
   };
+
+  useEffect(() => {
+    setAddedFields([])
+  }, [activeSlide])
 
   const handlePrev = (action) =>
     action === 'all' ? setActiveSlide(0) : setActiveSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1))
@@ -184,11 +202,17 @@ const MobileCarousel = () => {
           {renderDisplayFieldOption('docType', 'Document Type')}
         </Box>
       )}
+      {slides[activeSlide].id == 13 && (
+        <Box sx={{ display: 'flex', marginRight: 'auto', flexDirection: 'column', gap: '6px'}}>
+          {renderDisplayFieldOption('country', 'Country')}
+          {renderDisplayFieldOption('city', 'City')}
+          {renderDisplayFieldOption('address', 'Address')}
+        </Box>
+      )}
       <IconButton
         onClick={handlePrev}
         variant="contained"
         disabled={activeSlide === 0}
-        // sx={{ position: 'absolute', top: '50%', left: '8px', transform: 'translateY(-50%)' }}
       >
         <ArrowBack />
       </IconButton>
@@ -202,7 +226,7 @@ const MobileCarousel = () => {
           flexDirection: 'column',
           justifyItems: 'center',
           alignItems: 'center',
-          backgroundColor: [6, 10].includes(slides[activeSlide].id) ? '#000000' : '#FFFFFF',
+          backgroundColor: [6, 10, 11].includes(slides[activeSlide].id) ? '#000000' : '#FFFFFF',
           padding: 2,
           gap: 3,
         }}
@@ -220,7 +244,7 @@ const MobileCarousel = () => {
             <Iconify icon="material-symbols:arrow-back-ios-rounded" />
           </IconButton>
           <LinearProgress
-            sx={{ width: '80%', backgroundColor: [6, 10].includes(slides[activeSlide].id) ? '#FFFFFF' : '', height: '8px' }}
+            sx={{ width: '80%', backgroundColor: [6, 10, 11].includes(slides[activeSlide].id) ? '#FFFFFF' : '', height: '8px' }}
             variant="determinate"
             value={((activeSlide + 1) / slides.length) * 100}
           />
@@ -262,7 +286,7 @@ const MobileCarousel = () => {
           ) : (
             <></>
           )}
-          <Typography variant="h5" align="center" gutterBottom sx={{ color: [6, 10].includes(slides[activeSlide].id) ? '#FFFFFF' : ''}}>
+          <Typography variant="h5" align="center" gutterBottom sx={{ color: [6, 10, 11].includes(slides[activeSlide].id) ? '#FFFFFF' : ''}}>
             {slides[activeSlide].heading}
           </Typography>
 
@@ -324,14 +348,27 @@ const MobileCarousel = () => {
               </Box>
             </>
           )}
-          {slides[activeSlide].id == 10 && (
-            <Box></Box>
+          {[10, 11].includes(slides[activeSlide].id) && (
+            <CameraComponent handleNext={handleNext} documentPic={true} />
           )}
+          {slides[activeSlide].id === 12 && (
+            <Box display="flex" flexDirection="column" allignItems="center" justifyContent="center" width="100%">
+              <Iconify icon="carbon:map" style={{ color: '#26BAB1', width: '150px', height: '150px', marginRight: 'auto', marginLeft: 'auto'}}/>
+              <Typography sx={{fontSize: '24px', fontWeight: 600, textAlign: 'center', margin: '10px 30px'}}>We are almost there! Prepare to scan your
+ proof of address.</Typography>
+              <Typography sx={{fontSize: '14px', fontWeight: 400, textAlign: 'center', margin: '10px 30px', color: '#637381'}}>Turn to the front of yo
+ur proof and continue on the next screen. Document should not be older than 3 months. Ensure that your full name and address are on the document.</Typo
+graphy>
+            </Box>
+          )}
+           {slides[activeSlide].id === 13 && (
+            <AddressForm countries={countries} addedFields={addedFields}/>
+           )}
         </Box>
         <Button
           sx={{
             width: 150,
-            opacity: [6, 10].includes(slides[activeSlide].id) ? 0 : 1
+            opacity: [6, 10, 11].includes(slides[activeSlide].id) ? 0 : 1
           }}
           variant="contained"
           color="primary"
@@ -345,9 +382,8 @@ const MobileCarousel = () => {
       <IconButton
         onClick={handleNext}
         variant="contained"
-        sx={{marginRight: [5, 8].includes(slides[activeSlide].id) ? '26%' : ''}}
+        sx={{marginRight: [5, 8, 13].includes(slides[activeSlide].id) ? '26%' : ''}}
         disabled={activeSlide === slides.length - 1}
-        // sx={{ position: 'absolute', top: '50%', right: '8px', transform: 'translateY(-50%)' }}
       >
         <ArrowForward />
       </IconButton>
