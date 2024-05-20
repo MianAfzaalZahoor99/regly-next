@@ -21,18 +21,15 @@ import {
   InputLabel,
   Typography,
   FormControl,
-  TableContainer,
   TablePagination,
 } from '@mui/material';
 
 import Iconify from 'src/components/iconify'
 import { paths } from 'src/routes/paths';
 
-import { useTable } from 'src/components/table';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs/custom-breadcrumbs';
 
 import { rows } from '../team-data';
-// import profileImage from '../../assets/images/profileImage.jpeg';
 import profileImage from '../../../assets/images/profileImage.jpeg';
 
 const TeamList = () => {
@@ -66,7 +63,6 @@ const TeamList = () => {
   const handleRoleChange = (event) => {
     setSelectedRole(event.target.value);
   };
-  // const filteredRows = rows.filter((row) => row.status === selectedStatus);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -110,7 +106,6 @@ const TeamList = () => {
           ]}
           action={
             <Button
-              //   component={RouterLink}
               href="/dashboard/settings/team/new"
               variant="contained"
               sx={{
@@ -127,17 +122,10 @@ const TeamList = () => {
               Add New Member
             </Button>
           }
-          sx={{
-            mb: { xs: 3, md: 5 },
-          }}
+          sx={{ mb: { xs: 3, md: 5 } }}
         />
 
-        <Card
-          sx={{
-            padding: 3,
-            boxShadow: '0px 0px 20px 0px #BCBCBC73'
-          }}
-        >
+        <Card sx={{ padding: 3, boxShadow: '0px 0px 20px 0px #BCBCBC73' }}>
           <Box
             display="flex"
             sx={{
@@ -146,10 +134,6 @@ const TeamList = () => {
             gap={3}
             marginBottom={3}
           >
-            {/* <Container display='flex' gap={3} sx={{
-              // display : "flex",
-
-            }}> */}
             <FormControl
               sx={{
                 flexShrink: 0,
@@ -175,7 +159,6 @@ const TeamList = () => {
                 <MenuItem value="offline">Offline</MenuItem>
               </Select>
             </FormControl>
-            {/* </Container> */}
             <TextField
               sx={{
                 width: '100%',
@@ -211,13 +194,6 @@ const TeamList = () => {
             <Iconify icon='material-symbols-light:lists-rounded' sx={{ color: '#ee416f', cursor: 'pointer', backgroundColor: view === 'list' ? '#ee416f14' : '', borderRadius: view === 'list' ? '4px' : '', padding: view === 'list' ? '4px' : ''}} onClick={() => setView('list')} width={22} />
             <Iconify icon='zondicons:view-tile' sx={{ color: '#ee416f', cursor: 'pointer', backgroundColor: view === 'grid' ? '#ee416f14' : '', borderRadius: view === 'grid' ? '4px' : '', padding: view === 'grid' ? '4px' : ''}} onClick={() => setView('grid')} width={22} />
           </Box>
-
-          {/* <TeamTableData
-            rows={rows}
-            filteredRows={filteredRows}
-            selectedStatus={selectedStatus}
-            selectedRole={selectedRole}
-          /> */}
           {view === 'list' && (
             <Table>
               <TableHead>
@@ -261,6 +237,10 @@ const TeamList = () => {
                         border: `1px solid #EE416F14`,
                         backgroundColor: '#EE416F14',
                         color: '#EE416F',
+                        '&:hover': {
++                         backgroundColor: '#ee416f',
++                         color: '#FFFFFF'
++                       }
                       }}>{member.role}</Typography>
                       </TableCell>
                       <TableCell sx={{textTransform: 'capitalize'}}>
@@ -275,7 +255,11 @@ const TeamList = () => {
                     fontSize: '13px',
                     color: '#27BAB1',
                     backgroundColor: 'rgba(39, 186, 177, 0.1)',
-                    border: '1px solid rgba(39, 186, 177, 0.1)'
+                    border: '1px solid rgba(39, 186, 177, 0.1)',
++                    '&:hover': {
++                      backgroundColor: '#27BAB1',
++                      color: '#FFFFFF'
++                    }
                   }}
                 >{member.status}
                 </Typography></TableCell>
