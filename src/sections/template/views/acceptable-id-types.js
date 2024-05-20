@@ -271,16 +271,16 @@ const AcceptableIdTypes = () => {
               <TableHead>
                 <TableRow>
                   <TableCell>Country</TableCell>
-                  <TableCell>
+                  <TableCell sx={{ textAlign: 'center' }}>
                     <Checkbox checked={state.allSelectedIds} onClick={() => handleCheckBoxClick('bulk', null, 'selectedIds', 'allSelectedIds')} /> ID
                   </TableCell>
-                  <TableCell>
+                  <TableCell sx={{ textAlign: 'center' }}>
                     <Checkbox checked={state.allSelectedPassports} onClick={() => handleCheckBoxClick('bulk', null, 'selectedPassports', 'allSelectedPassports')} /> Passport
                   </TableCell>
-                  <TableCell>
+                  <TableCell sx={{ textAlign: 'center' }}>
                     <Checkbox checked={state.allSelectedLicenses} onClick={() => handleCheckBoxClick('bulk', null, 'selectedLicenses', 'allSelectedLicenses')} /> Driving License
                   </TableCell>
-                  <TableCell>
+                  <TableCell sx={{ textAlign: 'center' }}>
                     <Checkbox checked={state.allSelectedPermits} onClick={() => handleCheckBoxClick('bulk', null, 'selectedPermits', 'allSelectedPermits')} /> Redidence Permit
                   </TableCell>
                 </TableRow>
@@ -288,14 +288,14 @@ const AcceptableIdTypes = () => {
               <TableBody>
                 {paginatedCountries.map((country, i) => (
                     <TableRow key={i}>
-                      <TableCell sx={{ display: 'flex', alignItems: 'center', gap: '12px'}}>
+                      <TableCell sx={{ textAlign: 'center', display: 'flex', alignItems: 'center', gap: '12px'}}>
                         <ReactCountryFlag countryCode={country.code} svg />
                         <Typography>{country.name}</Typography>
                       </TableCell>
-                      <TableCell><Checkbox onClick={() => handleCheckBoxClick('single', country.code, 'selectedIds', 'allSelectedIds')} checked={state.selectedIds.includes(country.code)} /></TableCell>
-                      <TableCell><Checkbox onClick={() => handleCheckBoxClick('single', country.code, 'selectedPassports', 'allSelectedPassports')} checked={state.selectedPassports.includes(country.code)} /></TableCell>
-                      <TableCell><Checkbox onClick={() => handleCheckBoxClick('single', country.code, 'selectedLicenses', 'allSelectedLicenses')} checked={state.selectedLicenses.includes(country.code)} /></TableCell>
-                      <TableCell><Checkbox onClick={() => handleCheckBoxClick('single', country.code, 'selectedPermits', 'allSelectedPermits')} checked={state.selectedPermits.includes(country.code)} /></TableCell>
+                      <TableCell sx={{ textAlign: 'center' }}><Checkbox onClick={() => handleCheckBoxClick('single', country.code, 'selectedIds', 'allSelectedIds')} checked={state.selectedIds.includes(country.code)} /></TableCell>
+                      <TableCell sx={{ textAlign: 'center' }}><Checkbox onClick={() => handleCheckBoxClick('single', country.code, 'selectedPassports', 'allSelectedPassports')} checked={state.selectedPassports.includes(country.code)} /></TableCell>
+                      <TableCell sx={{ textAlign: 'center' }}><Checkbox onClick={() => handleCheckBoxClick('single', country.code, 'selectedLicenses', 'allSelectedLicenses')} checked={state.selectedLicenses.includes(country.code)} /></TableCell>
+                      <TableCell sx={{ textAlign: 'center' }}><Checkbox onClick={() => handleCheckBoxClick('single', country.code, 'selectedPermits', 'allSelectedPermits')} checked={state.selectedPermits.includes(country.code)} /></TableCell>
                     </TableRow>
                   ))}
               </TableBody>
