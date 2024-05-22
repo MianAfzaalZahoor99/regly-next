@@ -1,8 +1,12 @@
 import { Box, Typography } from '@mui/material';
 import React, { useRef, useState, useEffect } from 'react';
+import Image from 'next/image';
 import Iconify from 'src/components/iconify';
 
-const CameraComponent = ({handleNext, documentPic}) => {
+import videoFrame from '../../assets/images/videoFrames/faceFrame.png'
+import documentFrame from '../../assets/images/videoFrames/documentFrame.png'
+
+const CameraComponent = ({handleNext, documentPic, increasedHeight, screenID}) => {
   const videoRef = useRef();
   const canvasRef = useRef();
   const [imageData, setImageData] = useState(null);
@@ -39,7 +43,7 @@ const CameraComponent = ({handleNext, documentPic}) => {
   };
 
   return (
-    <Box sx={{ width: '100px', display: 'flex', flexDirection: 'column', alignItems: "center" }}>
+    <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: "center", justifyContent: 'center' }}>
       {/* <video
         style={{
             borderRadius : "1000px",
@@ -49,21 +53,17 @@ const CameraComponent = ({handleNext, documentPic}) => {
         ref={videoRef}
         autoPlay
         playsInline
-      />
-      <track kind="captions" src="/path/to/captions.vtt" srcLang="en" label="English" />
+      >
+          <track kind="captions" src="/path/to/captions.vtt" srcLang="en" label="English" />
       </video> */}
-      {documentPic ? (
-        <Iconify icon="fluent:border-none-24-regular" style={{ color: '#FFFFFF', width: '150px', height: '150px', margin: '50px 0px 20px 0px'}} />
-      ) : (
-        <Iconify icon="gala:portrait2" style={{ width: '150px', height: '150px', margin: '50px 0px 20px 0px'}} />
-      )}
+      <Image src={documentPic ? documentFrame : videoFrame} alt="Frame" style={{ width: increasedHeight ? '230px' : documentPic ? '320px' : '190px', height: increasedHeight ? '280px' : documentPic ? '200px' : '250px', margin: '20px 0px 10px 0px'}}  />
       <Box sx={{display: 'flex', alignItems: 'center', gap: '12px', width: 'auto', marginBottom: '40px'}}>
-        {!documentPic && <Iconify icon="uiw:warning" style={{ color: 'EE416F', margin: '20px 0px' }} />}
-        <Typography sx={{width: '100%', display: 'flex', alignItems: 'center', color: '#FFFFFF', fontSize: '14px', textWrap: 'nowrap'}}>
-          {documentPic ? <>Make sure the text is clearly visible</> : <>Please try again</>}
+        {(!documentPic || screenID === 16) && <Iconify icon="uiw:warning" style={{ color: 'EE416F' }} />}
+        <Typography sx={{width: '100%', display: 'flex', alignItems: 'center', color: '#637381', fontSize: '14px', textWrap: 'nowrap'}}>
+          {(screenID === 16) ? <>Blur document! Try again</> : documentPic ? <>Make sure the text is clearly visible</> : <>Please try again</>}
         </Typography>
-        </Box>
-      <Iconify icon="ph:radio-button-fill" style={{ color: '#EE416F', width: '100px', height: '100px'}} onClick={handleNext} />
+      </Box>
+      <Iconify icon="ph:radio-button-fill" style={{ color: '#EE416F', width: '100px', height: '100px', marginTop: increasedHeight ? '40px' : '60px' }} onClick={handleNext} />
       {/* <button onClick={handleCapture}>Take Picture</button>
       {imageData && <img src={imageData} alt="Captured" />} */}
       <canvas ref={canvasRef} style={{ display: 'none' }} width="640" height="480" />
