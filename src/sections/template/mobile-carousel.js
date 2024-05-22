@@ -16,6 +16,7 @@ import {
   InputLabel,
   FormControl,
   LinearProgress,
+  TextField,
 } from '@mui/material';
 
 import CarouselForm from './carousel-form';
@@ -27,6 +28,16 @@ import Iconify from 'src/components/iconify';
 import CameraComponent from './scan-face';
 import DocumentsForm from './documents-form';
 import AddressForm from './address-form';
+
+import footerImage from '../../assets/images/footer/footer_trademark.png'
+import cnicImage from '../../assets/images/kyc/utilityBill.png'
+import passportImage from '../../assets/images/kyc/passport.png'
+import lisenceImage from '../../assets/images/kyc/nationalID.png'
+import successImage from '../../assets/images/kyc/successIcon.png'
+import errorImage from '../../assets/images/kyc/errorIcon.png'
+import mapImage from '../../assets/images/kyc/location.png'
+import DocumentType from './document-type';
+import DataReviewForm from './data-review-form';
 
 const slides = [
   {
@@ -92,14 +103,17 @@ const slides = [
     subheadings: [
       {
         heading: 'National ID Card',
+        image: cnicImage,
         description: 'You will need to add live picture of your ID card for verfication',
       },
       {
         heading: 'Passport',
+        image: passportImage,
         description: 'You will need to add live picture of your passport for verfication',
       },
       {
         heading: 'Driving License',
+        image: lisenceImage,
         description: 'You will need to add live picture of your driving license for verfication',
       },
     ],
@@ -133,10 +147,44 @@ const slides = [
     heading: 'Please enter your address details',
     buttonText: 'Next',
   },
+  {
+    id: 14,
+    heading: 'Which proof of address document will you scan',
+    description:
+      'Please select the document type from the drop down list',
+  },
+  {
+    id: 15,
+  },
+  {
+    id: 16,
+  },
+  {
+    id: 17,
+    heading: 'Connect your ETH/BNB Wallet',
+    description:
+      'Scan QR or manually enter below',
+    buttonText: 'Continue',
+  },
+  {
+    id: 18,
+    heading: 'Review your Information',
+    description:
+      'If all good! Please click submit for verification',
+    buttonText: 'Submit',
+  },
+  {
+    id: 19,
+    buttonText: 'Finish',
+  },
+  {
+    id: 20,
+    buttonText: 'Go Back',
+  },
 ];
 
 const MobileCarousel = () => {
-  const [activeSlide, setActiveSlide] = useState(0);
+  const [activeSlide, setActiveSlide] = useState(0)
   const [addedFields, setAddedFields] = useState([])
 
   const handleNext = () => {
@@ -226,7 +274,7 @@ const MobileCarousel = () => {
           flexDirection: 'column',
           justifyItems: 'center',
           alignItems: 'center',
-          backgroundColor: [6, 10, 11].includes(slides[activeSlide].id) ? '#000000' : '#FFFFFF',
+          backgroundColor: [6, 10, 11, 15, 16].includes(slides[activeSlide].id) ? '#000000' : '#FFFFFF',
           padding: 2,
           gap: 3,
         }}
@@ -244,7 +292,7 @@ const MobileCarousel = () => {
             <Iconify icon="material-symbols:arrow-back-ios-rounded" />
           </IconButton>
           <LinearProgress
-            sx={{ width: '80%', backgroundColor: [6, 10, 11].includes(slides[activeSlide].id) ? '#FFFFFF' : '', height: '8px' }}
+            sx={{ width: '50%', backgroundColor: [6, 10, 11, 15, 16].includes(slides[activeSlide].id) ? '#FFFFFF' : '', height: '10px' }}
             variant="determinate"
             value={((activeSlide + 1) / slides.length) * 100}
           />
@@ -256,8 +304,8 @@ const MobileCarousel = () => {
         <Box
           sx={{
             height: '500px',
-            minHeight: '500px',
-            maxHeight: '500px',
+            minHeight: '550px',
+            maxHeight: '550px',
             display: 'flex',
             width: '100%',
             flexDirection: 'column',
@@ -286,7 +334,7 @@ const MobileCarousel = () => {
           ) : (
             <></>
           )}
-          <Typography variant="h5" align="center" gutterBottom sx={{ color: [6, 10, 11].includes(slides[activeSlide].id) ? '#FFFFFF' : ''}}>
+          <Typography variant="h4" align="center" gutterBottom sx={{ color: [6, 10, 11, 15, 16].includes(slides[activeSlide].id) ? '#FFFFFF' : '#637381'}}>
             {slides[activeSlide].heading}
           </Typography>
 
@@ -294,23 +342,28 @@ const MobileCarousel = () => {
             <Box>
               <List>
                 {slides[activeSlide].subheadings.map((item) => (
-                  <>
-                    <ListItem
-                      sx={{
-                        fontWeight: 'bold',
-                      }}
-                    >
-                      {item.heading}
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        fontSize: '13px',
-                        color: 'gray',
-                      }}
-                    >
-                      {item.description}
-                    </ListItem>
-                  </>
+                  <Box sx={{display: 'flex', marginBottom: item.image && '12px', alignItems: 'center', gap: '35px'}}>
+                    {item.image && <Image src={item.image} alt={item.heading} style={{height: '50px', width: '60px'}} />}
+                    <Box sx={{display: 'flex' , flexDirection: 'column', width: item.image && '200px'}}>
+                      <ListItem
+                        sx={{
+                          fontWeight: 'bold',
+
+                        }}
+                      >
+
+                        {item.heading}
+                      </ListItem>
+                      <ListItem
+                        sx={{
+                          fontSize: '13px',
+                          color: 'gray',
+                        }}
+                      >
+                        {item.description}
+                      </ListItem>
+                    </Box>
+                  </Box>
                 ))}
               </List>
             </Box>
@@ -348,35 +401,63 @@ const MobileCarousel = () => {
               </Box>
             </>
           )}
-          {[10, 11].includes(slides[activeSlide].id) && (
-            <CameraComponent handleNext={handleNext} documentPic={true} />
+          {[10, 11, 15, 16].includes(slides[activeSlide].id) && (
+            <CameraComponent handleNext={handleNext} documentPic={true} increasedHeight={[15, 16].includes(slides[activeSlide].id)} screenID={slides[activeSlide].id} />
           )}
           {slides[activeSlide].id === 12 && (
             <Box display="flex" flexDirection="column" allignItems="center" justifyContent="center" width="100%">
-              <Iconify icon="carbon:map" style={{ color: '#26BAB1', width: '150px', height: '150px', marginRight: 'auto', marginLeft: 'auto'}}/>
-              <Typography sx={{fontSize: '24px', fontWeight: 600, textAlign: 'center', margin: '10px 30px'}}>We are almost there! Prepare to scan your
- proof of address.</Typography>
-              <Typography sx={{fontSize: '14px', fontWeight: 400, textAlign: 'center', margin: '10px 30px', color: '#637381'}}>Turn to the front of yo
-ur proof and continue on the next screen. Document should not be older than 3 months. Ensure that your full name and address are on the document.</Typo
-graphy>
+              <Image src={mapImage} alt="location pin" style={{ width: '150px', height: '150px', marginRight: 'auto', marginLeft: 'auto', marginBottom: '12px'}} />
+              <Typography sx={{fontSize: '24px', fontWeight: 600, textAlign: 'center', margin: '10px 30px'}}>We are almost there! Prepare to scan your proof of address.</Typography>
+              <Typography sx={{fontSize: '14px', fontWeight: 400, textAlign: 'center', margin: '10px 30px', color: '#949BA2'}}>Turn to the front of your proof and continue on the next screen. Document should not be older than 3 months. Ensure that your full name and address are on the document.</Typography>
             </Box>
           )}
-           {slides[activeSlide].id === 13 && (
+          {slides[activeSlide].id === 13 && (
             <AddressForm countries={countries} addedFields={addedFields}/>
-           )}
+          )}
+          {slides[activeSlide].id === 14 && (
+            <DocumentType handleNext={handleNext} />
+          )}
+          {slides[activeSlide].id === 17 && (
+            <Box sx={{ width: '90%', marginTop: '40px', gap: '30px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <TextField
+                sx={{ width: '100%' }}
+                label="Wallet Address"
+                InputLabelProps={{ shrink: true }}
+              />
+              <Box sx={{ backgroundColor: '#000000', height: '200px', width: '200px', borderRadius: '8px', marginLeft: 'auto', marginRight: 'auto'}}></Box>
+            </Box>
+          )}
+          {slides[activeSlide].id === 18 && (
+            <DataReviewForm />
+          )}
+          {slides[activeSlide].id === 19 && (
+            <Box display="flex" flexDirection="column" alignItems="center" width="100%" gap={3}>
+              <Image src={successImage} alt="success" sx={{width: '170px', height: '150px'}} />
+              <Typography sx={{ color: '#000000', fontSize: '24px', fontWeight: 600}}>Thank you for letting us know.</Typography>
+              <Typography sx={{color: '#99a1a8', fontSize: '13px'}}>We will review your information and get back to you shortly.</Typography>
+            </Box>
+          )}
+          {slides[activeSlide].id === 20 && (
+            <Box display="flex" flexDirection="column" alignItems="center" width="100%" gap={3}>
+              <Image src={errorImage} alt="error" sx={{width: '170px', height: '150px'}} />
+              <Typography sx={{ color: '#000000', fontSize: '24px', fontWeight: 600}}>Unable to submit the information</Typography>
+              <Typography sx={{color: '#99a1a8', fontSize: '13px'}}>The information you provided is incorrect. Please try again</Typography>
+            </Box>
+          )}
         </Box>
         <Button
           sx={{
-            width: 150,
-            opacity: [6, 10, 11].includes(slides[activeSlide].id) ? 0 : 1
+            width: '300px',
+            opacity: ([6, 10, 11, 15, 16].includes(slides[activeSlide].id) || !slides[activeSlide].buttonText) ? 0 : 1
           }}
           variant="contained"
           color="primary"
-          onClick={handleNext}
-          disabled={activeSlide === slides.length - 1}
+          onClick={() => slides[activeSlide].id === 20 ? handlePrev('all') : handleNext()}
+          disabled={activeSlide === slides.length - 1 && slides[activeSlide].id !== 20 }
         >
           {slides[activeSlide].buttonText}
         </Button>
+        <Image src={footerImage} alt="Logo" style={{ height: '65px', width: '120px' }}  />
       </Card>
 
       <IconButton
