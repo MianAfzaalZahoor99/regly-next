@@ -257,6 +257,10 @@ const AcceptableIdTypes = () => {
                     marginLeft: 'auto',
                     height: '55px',
                     width: '100px',
+                    '&:hover': {
+                      backgroundColor: '#EE416F',
+                      color: '#FFFFFF'
+                    }
                   }}
                 >
                   Save
@@ -281,7 +285,7 @@ const AcceptableIdTypes = () => {
                     <Checkbox checked={state.allSelectedLicenses} onClick={() => handleCheckBoxClick('bulk', null, 'selectedLicenses', 'allSelectedLicenses')} /> Driving License
                   </TableCell>
                   <TableCell sx={{ textAlign: 'center' }}>
-                    <Checkbox checked={state.allSelectedPermits} onClick={() => handleCheckBoxClick('bulk', null, 'selectedPermits', 'allSelectedPermits')} /> Redidence Permit
+                    <Checkbox checked={state.allSelectedPermits} onClick={() => handleCheckBoxClick('bulk', null, 'selectedPermits', 'allSelectedPermits')} /> Residence Permit
                   </TableCell>
                 </TableRow>
               </TableHead>
