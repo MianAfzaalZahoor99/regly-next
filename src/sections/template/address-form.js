@@ -16,6 +16,7 @@ const AddressForm = ({ countries, addedFields }) => {
   const handleDragOver = (event) => {
     event.preventDefault()
   }
+
   const handleDragDrop = (event, index) => {
     const sourceIndex = event.dataTransfer.getData('text/plain')
     const sourceData = sectionFields[sourceIndex]
@@ -50,7 +51,7 @@ const AddressForm = ({ countries, addedFields }) => {
             <Iconify icon="mdi:image-filter-tilt-shift" />
             {field === 'country' && (
               <FormControl sx={{width: '100%'}}>
-                <InputLabel shrink>Country</InputLabel>
+                <InputLabel>Country</InputLabel>
                 <Select label="Select Country">
                   {countries.map((country, i) => (
                     <MenuItem key={i} value={country.name}>
