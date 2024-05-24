@@ -13,17 +13,21 @@ import {
   Avatar,
   MenuItem,
   TableRow,
+  ClearIcon,
   Container,
   TextField,
   TableBody,
   TableCell,
   TableHead,
+  IconButton,
   InputLabel,
   Typography,
   FormControl,
-  TablePagination,
+  InputAdornment,
+  TablePagination
 } from '@mui/material';
 
+import { Icon } from '@iconify/react'
 import Iconify from 'src/components/iconify'
 import { paths } from 'src/routes/paths';
 
@@ -34,7 +38,6 @@ import profileImage from '../../../assets/images/profileImage.jpeg';
 
 const TeamList = () => {
   const theme = useTheme();
-  const table = useTable();
   const [view, setView] = useState('list')
 
   const [page, setPage] = useState(0);
@@ -140,8 +143,18 @@ const TeamList = () => {
                 width: { xs: 1, md: 200 },
               }}
             >
-              <InputLabel shrink>Role</InputLabel>
-              <Select value={selectedRole} onChange={handleRoleChange} label="Select an option">
+              <InputLabel>Role</InputLabel>
+              <Select
+                endAdornment={
+                  <InputAdornment position="end">
+                    {selectedRole !== '' && (
+                      <Icon icon="ic:baseline-clear" onClick={() => setSelectedRole('')} style={{marginRight: '15px', cursor: 'pointer'}} />
+                    )}
+                  </InputAdornment>
+                }
+                value={selectedRole}
+                onChange={handleRoleChange}
+                label="Select an option">
                 <MenuItem value="admin">Admin</MenuItem>
                 <MenuItem value="user">User</MenuItem>
               </Select>
@@ -153,8 +166,19 @@ const TeamList = () => {
                 width: { xs: 1, md: 200 },
               }}
             >
-              <InputLabel shrink>Status</InputLabel>
-              <Select value={selectedStatus} onChange={handleStatusChange} label="Select an option">
+              <InputLabel>Status</InputLabel>
+              <Select
+                value={selectedStatus}
+                clearable
+                endAdornment={
+                  <InputAdornment position="end">
+                    {selectedStatus !== '' && (
+                      <Icon icon="ic:baseline-clear" onClick={() => setSelectedStatus('')} style={{marginRight: '15px', cursor: 'pointer'}} />
+                    )}
+                  </InputAdornment>
+                }
+                onChange={handleStatusChange}
+                label="Select an option">
                 <MenuItem value="online">Online</MenuItem>
                 <MenuItem value="offline">Offline</MenuItem>
               </Select>
@@ -163,26 +187,11 @@ const TeamList = () => {
               sx={{
                 width: '100%',
               }}
-              InputLabelProps={{ shrink: true }}
               label="Search"
               value={searchQuery}
               onChange={handleSearchChange}
             />
           </Box>
-          {searchQuery.length > 0 && (
-            <Box>
-              <Typography
-                sx={{
-                  backgroundColor: 'black',
-                  color: 'white',
-                  padding: '1px',
-                  display: 'inline',
-                }}
-              >
-                {searchQuery}
-              </Typography>
-            </Box>
-          )}
           <Box sx={{
               display: 'flex',
               alignItems: 'flex-end',
@@ -238,9 +247,9 @@ const TeamList = () => {
                         backgroundColor: '#EE416F14',
                         color: '#EE416F',
                         '&:hover': {
-+                         backgroundColor: '#ee416f',
-+                         color: '#FFFFFF'
-+                       }
+                          backgroundColor: '#ee416f',
+                          color: '#FFFFFF'
+                        }
                       }}>{member.role}</Typography>
                       </TableCell>
                       <TableCell sx={{textTransform: 'capitalize'}}>
@@ -256,10 +265,10 @@ const TeamList = () => {
                     color: '#27BAB1',
                     backgroundColor: 'rgba(39, 186, 177, 0.1)',
                     border: '1px solid rgba(39, 186, 177, 0.1)',
-+                    '&:hover': {
-+                      backgroundColor: '#27BAB1',
-+                      color: '#FFFFFF'
-+                    }
+                    '&:hover': {
+                      backgroundColor: '#27BAB1',
+                      color: '#FFFFFF'
+                    }
                   }}
                 >{member.status}
                 </Typography></TableCell>
