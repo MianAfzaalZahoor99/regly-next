@@ -50,7 +50,7 @@ const DocumentsForm = ({countries, addedFields}) => {
             <Iconify icon="mdi:image-filter-tilt-shift" />
             {field === 'insurance' && (
               <FormControl sx={{width: '100%'}}>
-                <InputLabel shrink>Insurance Country</InputLabel>
+                <InputLabel>Insurance Country</InputLabel>
                 <Select label="Insurance">
                   {countries.map((country, i) => (
                     <MenuItem key={i} value={country.name}>
@@ -70,7 +70,7 @@ const DocumentsForm = ({countries, addedFields}) => {
             )}
             {field === 'docType' && (
               <FormControl sx={{width: '100%'}}>
-                <InputLabel shrink>Document Type</InputLabel>
+                <InputLabel>Document Type</InputLabel>
                 <Select label="Insurance">
                   <MenuItem value='cnic'>National ID Card</MenuItem>
                   <MenuItem value='passport'>Passport</MenuItem>
