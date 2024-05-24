@@ -70,7 +70,7 @@ const CarouselForm = ({addedFields}) => {
             {field === 'email' && <TextField sx={{width: '100%'}} InputLabelProps={{ shrink: true }} label="Email" type="email" />}
             {field === 'country' && (
               <FormControl sx={{width: '100%'}}>
-                <InputLabel shrink>Select Country</InputLabel>
+                <InputLabel>Select Country</InputLabel>
                 <Select label="Select Country">
                   {countries.map((country) => <MenuItem key={country.name} value={country.name}>{country.name}</MenuItem>)}
                 </Select>
