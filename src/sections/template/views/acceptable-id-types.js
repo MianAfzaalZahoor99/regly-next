@@ -1,32 +1,32 @@
 'use client'
+
+import { Icon } from '@iconify/react'
 import React, { useState } from 'react'
+// import 'flag-icon-css/css/flag-icon.min.css';
+import ReactCountryFlag from 'react-country-flag'
+
 import {
   Box,
-  Container,
   Card,
-  Select,
-  MenuItem,
-  FormControl,
-  InputAdornment,
-  Checkbox,
-  FormGroup,
-  FormControlLabel,
-  Button,
   Table,
+  Select,
+  Button,
+  MenuItem,
+  Checkbox,
+  TableRow,
+  Container,
   TableHead,
   TableBody,
   TableCell,
-  TableRow,
-  CheckBox,
-  TablePagination,
   Typography,
+  FormControl,
+  InputAdornment,
+  TablePagination,
 } from '@mui/material'
-import CustomBreadcrumbs from 'src/components/custom-breadcrumbs/custom-breadcrumbs'
 
 import { paths } from 'src/routes/paths'
-import { Icon } from '@iconify/react'
-// import 'flag-icon-css/css/flag-icon.min.css';
-import ReactCountryFlag from 'react-country-flag'
+
+import CustomBreadcrumbs from 'src/components/custom-breadcrumbs/custom-breadcrumbs'
 
 export const countries = [
   {
@@ -180,8 +180,7 @@ const AcceptableIdTypes = () => {
   }
 
   return (
-    <>
-      <Container
+    <Container
         sx={{
           fontFamily: 'Gilroy Extrabold',
         }}>
@@ -222,10 +221,10 @@ const AcceptableIdTypes = () => {
                         <Icon icon="tabler:world" />
                       </InputAdornment>
                     }
-                    renderValue={(selected) => (
+                    renderValue={(newSelected) => (
                       <Box sx={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-                        <ReactCountryFlag countryCode={countries.filter((country) => country.name == selected)[0].code} svg />
-                        {selected}
+                        <ReactCountryFlag countryCode={countries.filter((country) => country.name === newSelected)[0].code} svg />
+                        {newSelected}
                       </Box>
                     )}
                     MenuProps={{
@@ -316,7 +315,6 @@ const AcceptableIdTypes = () => {
           </Card>
 
       </Container>
-    </>
   )
 }
 

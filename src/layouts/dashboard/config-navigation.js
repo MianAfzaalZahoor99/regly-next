@@ -119,6 +119,14 @@ export function useNavData() {
             ],
           },
           {
+            title: t('risk management'),
+            path: paths.dashboard.risk.root,
+            icon: ICONS.user,
+            children: [
+              { title: t('risk scoring and rating'), path: paths.dashboard.risk.riskScoringAndRating },
+            ],
+          },
+          {
             title: t('template'),
             path: paths.dashboard.template.root,
             icon: ICONS.user,

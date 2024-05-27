@@ -19,4 +19,9 @@
   src: local('CircularStd'), url('CircularStd-Bold.otf') format('opentype');
 }
 
- 
+@font-face {
+  font-family: 'Gilroy';
+  font-weight: 700;
+  font-style: normal;
+  src: local('Gilroy'), url('Gilroy-ExtraBold.ttf') format('opentype');
+}

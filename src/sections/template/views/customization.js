@@ -3,7 +3,6 @@
 import React from 'react';
 
 import {
-  Box,
   Container,
 } from '@mui/material';
 
@@ -16,7 +15,7 @@ import MobileCarousel from '../mobile-carousel';
 const Customization = () => (
     <Container>
         <CustomBreadcrumbs
-          heading="Customizations"
+          heading="Customization"
           links={[
             { name: 'Dashboard', href: paths.dashboard.root },
             { name: 'Template', href: paths.dashboard.template.root },

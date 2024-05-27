@@ -13,12 +13,12 @@ import {
 
 import { paths } from 'src/routes/paths';
 
+import Iconify from 'src/components/iconify';
 import { useSettingsContext } from 'src/components/settings';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs/custom-breadcrumbs';
 
 import AuditTable from '../audit/audit-table';
 import { auditTableData } from '../audit/audit-data';
-import Iconify from 'src/components/iconify';
 
 const AuditLogs = () => {
   const settings = useSettingsContext();

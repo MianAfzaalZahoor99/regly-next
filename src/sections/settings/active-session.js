@@ -1,10 +1,10 @@
-import { Icon } from '@iconify/react';
-import React, { useState } from 'react';
+import { useState } from 'react'
+import { Icon } from '@iconify/react'
 
-import { Box, List, Button, Divider, ListItem, Container, Typography, Table, TableHead, TableBody, TableRow, TableCell, Checkbox } from '@mui/material';
+import { Box, Table, Button, Divider, TableRow, Checkbox, TableHead, TableBody, TableCell, Typography } from '@mui/material';
 
-import { useSnackbar } from 'src/components/snackbar';
 import Iconify from 'src/components/iconify';
+import { useSnackbar } from 'src/components/snackbar';
 
 const sessions = [
   {

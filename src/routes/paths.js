@@ -101,7 +101,6 @@ export const paths = {
   // DASHBOARD
   dashboard: {
     root: ROOTS.DASHBOARD,
-    settings: ROOTS.SETTINGS,
     team: `${ROOTS.SETTINGS}/team`,
     audit: `${ROOTS.SETTINGS}/audit`,
     template: {
@@ -109,6 +108,10 @@ export const paths = {
       customization: `${ROOTS.DASHBOARD}/template/customization`,
       acceptableCountries: `${ROOTS.DASHBOARD}/template/acceptableCountries`,
       acceptableIdTypes: `${ROOTS.DASHBOARD}/template/acceptableIdTypes`,
+    },
+    risk: {
+      root: `${ROOTS.DASHBOARD}/risk`,
+      riskScoringAndRating: `${ROOTS.DASHBOARD}/risk/riskScoringAndRating`,
     },
     mail: `${ROOTS.DASHBOARD}/mail`,
     chat: `${ROOTS.DASHBOARD}/chat`,
@@ -138,6 +141,7 @@ export const paths = {
       },
     },
     settings: {
+      ...ROOTS.SETTINGS,
       root: `${ROOTS.DASHBOARD}/settings`,
       team: `${ROOTS.DASHBOARD}/settings/team`,
     },

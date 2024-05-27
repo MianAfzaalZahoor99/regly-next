@@ -1,13 +1,16 @@
 'use client';
 
-import React, {useEffect, useState}   from 'react';
+import PropTypes from 'prop-types'
+import React, {useState, useEffect}   from 'react';
 
-import { Box, Select, MenuItem, TextField, InputLabel, FormControl, Grid } from '@mui/material';
+import { Box, Select, MenuItem, TextField, InputLabel, FormControl } from '@mui/material';
 
-import { countries } from './views/countries';
 import Iconify from 'src/components/iconify';
 
+import { countries } from './views/countries';
+
 const CarouselForm = ({addedFields}) => {
+  const [selectedCountry, setSelectedCountry] = useState('Australia')
   const [sectionFields, setSectionFields] = useState(addedFields)
   const handleDragStart = (event, index) => {
     event.dataTransfer.setData('text/plain', index)
@@ -30,6 +33,9 @@ const CarouselForm = ({addedFields}) => {
     setSectionFields(updatedFields)
   }
 
+  const handleChange = (event) => {
+    setSelectedCountry(event.target.value)
+  }
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -52,7 +58,7 @@ const CarouselForm = ({addedFields}) => {
               alignItems: 'center',
               gap: 2,
             }}>
-            <Iconify icon="mdi:image-filter-tilt-shift" />
+            <Iconify icon="ri:drag-move-2-fill" />
             {field === 'name' && (
               <>
                 <TextField sx={{width: '50%'}} label="First Name" InputLabelProps={{ shrink: true }} />
@@ -70,8 +76,8 @@ const CarouselForm = ({addedFields}) => {
             {field === 'email' && <TextField sx={{width: '100%'}} InputLabelProps={{ shrink: true }} label="Email" type="email" />}
             {field === 'country' && (
               <FormControl sx={{width: '100%'}}>
-                <InputLabel>Select Country</InputLabel>
-                <Select label="Select Country">
+                <InputLabel shrink>Select Country</InputLabel>
+                <Select value={selectedCountry} onChange={handleChange} label="Select Country">
                   {countries.map((country) => <MenuItem key={country.name} value={country.name}>{country.name}</MenuItem>)}
                 </Select>
               </FormControl>
@@ -81,6 +87,10 @@ const CarouselForm = ({addedFields}) => {
       </FormControl>
     </Box>
   );
+};
+
+CarouselForm.propTypes = {
+  addedFields: PropTypes.array,
 };
 
 export default CarouselForm;

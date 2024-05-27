@@ -1,9 +1,17 @@
-import { Box, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material'
-import { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
+import { useState, useEffect } from 'react'
+
+import { Box, Select, MenuItem, TextField, InputLabel, FormControl } from '@mui/material'
+
 import Iconify from 'src/components/iconify'
 
 const AddressForm = ({ countries, addedFields }) => {
   const [sectionFields, setSectionFields] = useState(addedFields)
+  const [selectedCountry, setSelectedCountry] = useState('Australia')
+
+  const handleChange = (event) => {
+    setSelectedCountry(event.target.value)
+  }
   const [address, setAddress] = useState('')
   const handleDragStart = (event, index) => {
     event.dataTransfer.setData('text/plain', index)
@@ -48,11 +56,11 @@ const AddressForm = ({ countries, addedFields }) => {
             alignItems: 'center',
             gap: 2,
           }}>
-            <Iconify icon="mdi:image-filter-tilt-shift" />
+            <Iconify icon="ri:drag-move-2-fill" />
             {field === 'country' && (
               <FormControl sx={{width: '100%'}}>
-                <InputLabel>Country</InputLabel>
-                <Select label="Select Country">
+                <InputLabel shrink>Country</InputLabel>
+                <Select value={selectedCountry} onChange={handleChange} label="Select Country">
                   {countries.map((country, i) => (
                     <MenuItem key={i} value={country.name}>
                         {country.name}
@@ -86,5 +94,10 @@ const AddressForm = ({ countries, addedFields }) => {
     </Box>
   )
 }
+
+AddressForm.propTypes = {
+  countries: PropTypes.array,
+  addedFields: PropTypes.array,
+};
 
 export default AddressForm

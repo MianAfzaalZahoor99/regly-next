@@ -1,12 +1,12 @@
-import { Box, FormControl, MenuItem, Select, Typography } from '@mui/material'
-import { useState } from 'react'
 import Image from 'next/image';
+import PropTypes from 'prop-types'
+
+import { Box, Select, MenuItem, Typography, FormControl } from '@mui/material'
 
 import cameraImage from '../../assets/images/videoFrames/cameraIcon.png'
 import uploadImage from '../../assets/images/videoFrames/uploadIcon.png'
 
-const DocumentType = ({handleNext}) => {
-  return (
+const DocumentType = ({handleNext}) => (
     <Box sx={{width: '100%', marginTop: '100px'}}>
       <FormControl sx={{width: '100%', marginBottom: '50px'}}>
         <Select label="Insurance">
@@ -29,6 +29,10 @@ const DocumentType = ({handleNext}) => {
       </Box>
     </Box>
   )
+
+DocumentType.propTypes = {
+  handleNext: PropTypes.any,
 }
+
 
 export default DocumentType

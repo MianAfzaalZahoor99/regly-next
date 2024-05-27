@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import PropTypes from 'prop-types'
 
 import { useTheme } from '@mui/system';
 import Table from '@mui/material/Table';
@@ -13,14 +14,13 @@ import TableHead from '@mui/material/TableHead';
 import { Avatar, Typography } from '@mui/material';
 import TableContainer from '@mui/material/TableContainer';
 
-import { useSettingsContext } from 'src/components/settings';
+// import { useSettingsContext } from 'src/components/settings';
 
 import profileImage from '../../assets/images/profileImage.jpeg';
 
-const rowsPerPageOptions = [5, 10, 15, 20, 25];
-const TeamTableData = ({ rows, filteredRows, selectedStatus, selectedRole }) => {
+const TeamTableData = ({ filteredRows, selectedStatus, selectedRole }) => {
   const theme = useTheme();
-  const settings = useSettingsContext();
+  // const settings = useSettingsContext();
 
   const statusFilteredRows =
     selectedStatus === ''
@@ -31,7 +31,7 @@ const TeamTableData = ({ rows, filteredRows, selectedStatus, selectedRole }) => 
     selectedRole === ''
       ? statusFilteredRows
       : statusFilteredRows.filter((row) => row.role === selectedRole);
- 
+
 
   return (
     <TableContainer component={Paper}>
@@ -115,7 +115,7 @@ const TeamTableData = ({ rows, filteredRows, selectedStatus, selectedRole }) => 
         <TableBody bg="blue">
           <TableCell colSpan={6}>
             {/* <TablePagination
-              
+
               count={teamData.length}
               rowsPerPage={rowsPerPage}
               page={page}
@@ -128,4 +128,11 @@ const TeamTableData = ({ rows, filteredRows, selectedStatus, selectedRole }) => 
     </TableContainer>
   );
 };
+
+TeamTableData.propTypes = {
+  filteredRows: PropTypes.array,
+  selectedStatus: PropTypes.string,
+  selectedRole: PropTypes.string,
+}
+
 export default TeamTableData;

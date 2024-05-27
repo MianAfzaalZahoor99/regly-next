@@ -1,11 +1,11 @@
-import { Box, Typography } from '@mui/material'
-import Image from 'next/image'
 import React from 'react'
+import Image from 'next/image'
+
+import { Box, Typography } from '@mui/material'
 
 import editImage from '../../assets/images/edit.png'
 
-const DataReviewForm = () => {
-  return (
+const DataReviewForm = () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%', alignItems: 'center'}}>
       <Box sx={{ display: 'flex', flexDirection: 'column', width: '80%', marginTop: '40px'}}>
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', borderBottom: '2px solid #d2cbcb'}}>
@@ -51,6 +51,5 @@ const DataReviewForm = () => {
       </Box>
     </Box>
   )
-}
 
 export default DataReviewForm

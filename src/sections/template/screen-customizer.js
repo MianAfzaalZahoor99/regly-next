@@ -1,11 +1,12 @@
-import { Box, FormControl, Grid, MenuItem, Select, Typography } from "@mui/material";
-import { ColorPicker } from "material-ui-color"
-import { makeStyles } from "@material-ui/core"
-
 import Image from "next/image";
+import { useState } from "react";
+import PropTypes from 'prop-types'
+import { makeStyles } from "@material-ui/core"
+import { ColorPicker } from "material-ui-color"
+
+import { Box, Grid, Select, MenuItem, Typography, FormControl } from "@mui/material";
 
 import uploadImage from '../../assets/images/exporticon.png'
-import { useState } from "react";
 
 const useStyles = makeStyles({
   root: {
@@ -80,7 +81,7 @@ const ScreenCustomizer = ({
           <FormControl sx={{width: '200px'}}>
             <Select value={fontFamily[activeSlide]} selectedValue={fontFamily[activeSlide]} onChange={handleFontFamilyChange}>
               <MenuItem value='Inter'>Inter</MenuItem>
-              <MenuItem value='Gilroy Extrabold'>Gilroy ExtraBold</MenuItem>
+              <MenuItem value='Gilroy'>Gilroy ExtraBold</MenuItem>
               <MenuItem value='Rubik'>Rubik</MenuItem>
             </Select>
           </FormControl>
@@ -102,6 +103,18 @@ const ScreenCustomizer = ({
       </Box>
     </Grid>
   )
+}
+
+ScreenCustomizer.propTypes = {
+  buttonColor: PropTypes.any,
+  setButtonColor: PropTypes.any,
+  barColor: PropTypes.any,
+  setBarColor: PropTypes.any,
+  fontFamily: PropTypes.any,
+  setFontFamily: PropTypes.any,
+  replaceLogo: PropTypes.any,
+  setReplaceLogo: PropTypes.any,
+  activeSlide: PropTypes.number,
 }
 
 export default ScreenCustomizer

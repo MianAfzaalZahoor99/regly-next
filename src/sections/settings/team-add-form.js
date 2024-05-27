@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 // import FormProvider from 'src/components/hook-form/form-provider';
-import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -31,9 +30,10 @@ const countries = [
 
 const AddTeamForm = () => {
   const router = useRouter();
-  const { onSubmit, control } = useForm();
+  const imageText = 'Upload Image'
+  // const { onSubmit, control } = useForm();
 
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
   const handleFileInputChange = (event) => {
@@ -47,12 +47,13 @@ const AddTeamForm = () => {
     }
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
   const handleSubmit = () => {
     router.push('/dashboard/settings/team');
+    // handleClose()
   };
   const method = () => {};
 
@@ -99,7 +100,7 @@ const AddTeamForm = () => {
                 />
                 <label htmlFor="image-upload">
                   <Button variant="contained" component="span" disabled={selectedImage}>
-                    Upload Image
+                    {imageText}
                   </Button>
                 </label>
               </Box>

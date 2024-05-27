@@ -1,9 +1,23 @@
-import { Box, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material'
-import { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
+import { useState, useEffect } from 'react'
+
+import { Box, Select, MenuItem, TextField, InputLabel, FormControl } from '@mui/material'
+
 import Iconify from 'src/components/iconify'
 
 const DocumentsForm = ({countries, addedFields}) => {
   const [sectionFields, setSectionFields] = useState(addedFields)
+  const [selectedCountry, setSelectedCountry] = useState('Australia')
+  const [selectedDoc, setSelectedDoc] = useState('cnic')
+
+  const handleChange = (event) => {
+    setSelectedCountry(event.target.value)
+  }
+
+  const handleDocChange = (event) => {
+    setSelectedDoc(event.target.value)
+  }
+
   const handleDragStart = (event, index) => {
     event.dataTransfer.setData('text/plain', index)
   }
@@ -47,11 +61,11 @@ const DocumentsForm = ({countries, addedFields}) => {
             alignItems: 'center',
             gap: 2,
           }}>
-            <Iconify icon="mdi:image-filter-tilt-shift" />
+            <Iconify icon="ri:drag-move-2-fill" />
             {field === 'insurance' && (
               <FormControl sx={{width: '100%'}}>
-                <InputLabel>Insurance Country</InputLabel>
-                <Select label="Insurance">
+                <InputLabel shrink>Insurance Country</InputLabel>
+                <Select value={selectedCountry} onChange={handleChange} label="Insurance Country">
                   {countries.map((country, i) => (
                     <MenuItem key={i} value={country.name}>
                         {country.name}
@@ -70,8 +84,8 @@ const DocumentsForm = ({countries, addedFields}) => {
             )}
             {field === 'docType' && (
               <FormControl sx={{width: '100%'}}>
-                <InputLabel>Document Type</InputLabel>
-                <Select label="Insurance">
+                <InputLabel shrink>Document Type</InputLabel>
+                <Select value={selectedDoc} onChange={handleDocChange} label="Document Type">
                   <MenuItem value='cnic'>National ID Card</MenuItem>
                   <MenuItem value='passport'>Passport</MenuItem>
                   <MenuItem value='license'>Driving License</MenuItem>
@@ -83,6 +97,11 @@ const DocumentsForm = ({countries, addedFields}) => {
       </FormControl>
     </Box>
   )
+}
+
+DocumentsForm.propTypes = {
+  countries: PropTypes.array,
+  addedFields: PropTypes.array,
 }
 
 export default DocumentsForm
