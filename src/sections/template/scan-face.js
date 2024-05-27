@@ -1,6 +1,9 @@
-import { Box, Typography } from '@mui/material';
-import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
+import PropTypes from 'prop-types'
+import React, { useRef, useEffect } from 'react';
+
+import { Box, Typography } from '@mui/material';
+
 import Iconify from 'src/components/iconify';
 
 import videoFrame from '../../assets/images/videoFrames/faceFrame.png'
@@ -9,7 +12,7 @@ import documentFrame from '../../assets/images/videoFrames/documentFrame.png'
 const CameraComponent = ({handleNext, documentPic, increasedHeight, screenID}) => {
   const videoRef = useRef();
   const canvasRef = useRef();
-  const [imageData, setImageData] = useState(null);
+  // const [imageData, setImageData] = useState(null);
 
   useEffect(() => {
     const constraints = { video: true };
@@ -39,7 +42,7 @@ const CameraComponent = ({handleNext, documentPic, increasedHeight, screenID}) =
     const context = canvasRef.current.getContext('2d');
     context.drawImage(videoRef.current, 0, 0, 640, 480);
     const dataUrl = canvasRef.current.toDataURL('image/png');
-    setImageData(dataUrl);
+    // setImageData(dataUrl);
   };
 
   return (
@@ -70,5 +73,12 @@ const CameraComponent = ({handleNext, documentPic, increasedHeight, screenID}) =
     </Box>
   );
 };
+
+CameraComponent.propTypes = {
+  handleNext: PropTypes.any,
+  documentPic: PropTypes.any,
+  increasedHeight: PropTypes.any,
+  screenID: PropTypes.number,
+}
 
 export default CameraComponent;

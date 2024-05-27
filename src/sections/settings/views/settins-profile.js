@@ -8,7 +8,7 @@ import Card from '@mui/material/Card'
 import Container from '@mui/material/Container'
 import { useTheme } from '@mui/material/styles'
 import Tabs, { tabsClasses } from '@mui/material/Tabs'
-import { Box, Avatar, ListItemText, Stack, CardHeader, Link } from '@mui/material'
+import { Box, Link, Stack, Avatar, CardHeader, ListItemText } from '@mui/material'
 
 import { paths } from 'src/routes/paths'
 

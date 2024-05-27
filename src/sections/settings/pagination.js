@@ -14,10 +14,10 @@ function Pagination({ page, count, rowsPerPage, onPageChange, onRowsPerPageChang
     onPageChange(newPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
-    onRowsPerPageChange(parseInt(event.target.value, 10));
-    onPageChange(0);
-  };
+  // const handleChangeRowsPerPage = (event) => {
+  //   onRowsPerPageChange(parseInt(event.target.value, 10));
+  //   onPageChange(0);
+  // };
 
   return (
     <Box display="flex" alignItems="center" justifyContent="space-between">

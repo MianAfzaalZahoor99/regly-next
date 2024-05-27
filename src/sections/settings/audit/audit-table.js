@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
+import PropTypes from 'prop-types'
 
 import {
   Table,
@@ -8,8 +9,8 @@ import {
   TableBody,
   TableCell,
   TableHead,
-  TablePagination,
   Typography,
+  TablePagination,
 } from '@mui/material';
 
 import { auditTableData } from './audit-data';
@@ -116,5 +117,9 @@ const AuditTable = ({ auditData }) => {
     </Table>
   );
 };
+
+AuditTable.propTypes = {
+  auditData: PropTypes.array.isRequired,
+}
 
 export default AuditTable;

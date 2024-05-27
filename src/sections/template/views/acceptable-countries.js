@@ -120,7 +120,6 @@ const AcceptableCountries = () => {
               sx={{
                 backgroundColor: '#d7d7d7',
                 color: 'black',
-                display: 'inline',
                 borderRadius: 7,
                 paddingY: '3px',
                 width: '140px',

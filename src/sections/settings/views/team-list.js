@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
+import { Icon } from '@iconify/react'
 
 import { useTheme } from '@mui/system';
 import {
@@ -13,13 +14,11 @@ import {
   Avatar,
   MenuItem,
   TableRow,
-  ClearIcon,
   Container,
   TextField,
   TableBody,
   TableCell,
   TableHead,
-  IconButton,
   InputLabel,
   Typography,
   FormControl,
@@ -27,10 +26,9 @@ import {
   TablePagination
 } from '@mui/material';
 
-import { Icon } from '@iconify/react'
-import Iconify from 'src/components/iconify'
 import { paths } from 'src/routes/paths';
 
+import Iconify from 'src/components/iconify'
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs/custom-breadcrumbs';
 
 import { rows } from '../team-data';

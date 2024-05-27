@@ -1,4 +1,6 @@
 
+import PropTypes from 'prop-types'
+
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
@@ -9,7 +11,7 @@ import { bgGradient } from 'src/theme/css';
 
 // ----------------------------------------------------------------------
 
-export default function ProfileHome({ avatarUrl }) {
+export default function ProfileHome({ avatarUrl, coverUrl, name, role }) {
   const theme = useTheme();
 
   return (
@@ -70,9 +72,9 @@ export default function ProfileHome({ avatarUrl }) {
   );
 }
 
-// ProfileHome.propTypes = {
-//   avatarUrl: PropTypes.string,
-//   coverUrl: PropTypes.string,
-//   name: PropTypes.string,
-//   role: PropTypes.string,
-// };
+ProfileHome.propTypes = {
+  avatarUrl: PropTypes.string,
+  coverUrl: PropTypes.string,
+  name: PropTypes.string,
+  role: PropTypes.string,
+};

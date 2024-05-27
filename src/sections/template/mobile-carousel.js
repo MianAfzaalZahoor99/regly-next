@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Close, ArrowBack, ArrowForward } from '@mui/icons-material';
 import {
@@ -7,38 +7,34 @@ import {
   Card,
   List,
   Button,
-  Select,
   ListItem,
-  MenuItem,
   Container,
+  TextField,
   Typography,
   IconButton,
-  InputLabel,
-  FormControl,
   LinearProgress,
-  TextField,
 } from '@mui/material';
 
+import Iconify from 'src/components/iconify';
+
+import AddressForm from './address-form';
+import CameraComponent from './scan-face';
 import CarouselForm from './carousel-form';
+import DocumentType from './document-type';
+import DocumentsForm from './documents-form';
 import { countries } from './views/countries';
+import DataReviewForm from './data-review-form';
+import ScreenCustomizer from './screen-customizer';
 import image1 from '../../assets/images/slide1.jpg';
 import QRCode from '../../assets/images/QRCode.png';
 import selfie from '../../assets/images/selfie.jpg';
-import Iconify from 'src/components/iconify';
-import CameraComponent from './scan-face';
-import DocumentsForm from './documents-form';
-import AddressForm from './address-form';
-
-import footerImage from '../../assets/images/footer/footer_trademark.png'
+import mapImage from '../../assets/images/kyc/location.png'
+import errorImage from '../../assets/images/kyc/errorIcon.png'
 import cnicImage from '../../assets/images/kyc/utilityBill.png'
 import passportImage from '../../assets/images/kyc/passport.png'
 import lisenceImage from '../../assets/images/kyc/nationalID.png'
 import successImage from '../../assets/images/kyc/successIcon.png'
-import errorImage from '../../assets/images/kyc/errorIcon.png'
-import mapImage from '../../assets/images/kyc/location.png'
-import DocumentType from './document-type';
-import DataReviewForm from './data-review-form';
-import ScreenCustomizer from './screen-customizer';
+import footerImage from '../../assets/images/footer/footer_trademark.png'
 
 const slides = [
   {
@@ -84,17 +80,17 @@ const slides = [
     img: QRCode,
   },
   {
+    id: 5,
+    heading: 'Please fill out with your personal information, email address and nationality',
+    buttonText: 'Let`s start !',
+  },
+  {
     id: 4,
 
     heading: 'Prepare yourself for your selfie video',
     buttonText: 'Let`s do it',
     description: 'Position yourself in good lighting and follow instructions ont the next screen.',
     img: selfie,
-  },
-  {
-    id: 5,
-    heading: 'Please fill out with your personal information, email address and nationality',
-    buttonText: 'Let`s start !',
   },
   { id: 6, heading: 'Align Your Face', buttonText: 'Start!', },
   {
@@ -189,7 +185,7 @@ const MobileCarousel = () => {
   const [addedFields, setAddedFields] = useState([])
   const [buttonColor, setButtonColor] = useState(JSON.parse(localStorage.getItem('buttonColor')) ?? { ...Array(20).fill().map((_) => ("#EE416F"))})
   const [barColor, setBarColor] = useState(JSON.parse(localStorage.getItem('barColor')) ?? { ...Array(20).fill().map((_) => ("#EE416F"))})
-  const [fontFamily, setFontFamily] = useState(JSON.parse(localStorage.getItem('fontFamily')) ?? { ...Array(20).fill().map((_) => ('Gilroy Extrabold'))})
+  const [fontFamily, setFontFamily] = useState(JSON.parse(localStorage.getItem('fontFamily')) ?? { ...Array(20).fill().map((_) => ('Gilroy'))})
   const [replaceLogo, setReplaceLogo] = useState({})
 
   const handleNext = () => {
@@ -252,7 +248,7 @@ const MobileCarousel = () => {
       <Container
         sx={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center', fontFamily: fontFamily[activeSlide] ? `'${fontFamily[activeSlide]}' !important` : '', }}
       >
-        {slides[activeSlide].id == 5 && (
+        {slides[activeSlide].id === 5 && (
           <Box sx={{ display: 'flex', marginRight: 'auto', flexDirection: 'column', gap: '6px'}}>
             {renderDisplayFieldOption('name', 'First Name & Last Name')}
             {renderDisplayFieldOption('dob', 'Date of Birth')}
@@ -260,14 +256,14 @@ const MobileCarousel = () => {
             {renderDisplayFieldOption('country', 'Country')}
           </Box>
         )}
-        {slides[activeSlide].id == 8 && (
+        {slides[activeSlide].id === 8 && (
           <Box sx={{ display: 'flex', marginRight: 'auto', flexDirection: 'column', gap: '6px'}}>
             {renderDisplayFieldOption('insurance', 'Insurance')}
             {renderDisplayFieldOption('id', 'ID')}
             {renderDisplayFieldOption('docType', 'Document Type')}
           </Box>
         )}
-        {slides[activeSlide].id == 13 && (
+        {slides[activeSlide].id === 13 && (
           <Box sx={{ display: 'flex', marginRight: 'auto', flexDirection: 'column', gap: '6px'}}>
             {renderDisplayFieldOption('country', 'Country')}
             {renderDisplayFieldOption('city', 'City')}
@@ -285,7 +281,9 @@ const MobileCarousel = () => {
         <Card
           sx={{
             width: '40%',
-            //   height : "110vh",
+            height: '750px',
+            minHeight: '750px',
+            maxHeight: '750px',
             marginBottom: 2,
             display: 'flex',
             flexDirection: 'column',
@@ -326,9 +324,6 @@ const MobileCarousel = () => {
 
           <Box
             sx={{
-              height: '500px',
-              minHeight: '550px',
-              maxHeight: '550px',
               display: 'flex',
               width: '100%',
               flexDirection: 'column',
@@ -336,7 +331,7 @@ const MobileCarousel = () => {
               alignItems: 'center',
             }}
           >
-            {slides[activeSlide].id == 3 && (
+            {slides[activeSlide].id === 3 && (
               <Typography variant="h5" align="center" gutterBottom>
                 Do you want to contiue on the phone ?
               </Typography>
@@ -361,7 +356,7 @@ const MobileCarousel = () => {
                   style={{ width: '200px', height: '200px', marginLeft: 'auto', marginRight: 'auto', marginBottom: '40px' }} />
               )
             ) : (
-              <></>
+              <>{` `}</>
             )}
             <Typography variant="h4" align="center" gutterBottom sx={{ color: [6, 10, 11, 15, 16].includes(slides[activeSlide].id) ? '#FFFFFF' : '#637381'}}>
               {slides[activeSlide].heading}
@@ -397,10 +392,10 @@ const MobileCarousel = () => {
                 </List>
               </Box>
             ) : (
-              <></>
+              <>{` `}</>
             )}
 
-            {slides[activeSlide].id == 5 && (
+            {slides[activeSlide].id === 5 && (
               <CarouselForm addedFields={addedFields} />
             )}
             <Typography
@@ -412,13 +407,13 @@ const MobileCarousel = () => {
             >
               {slides[activeSlide].description}
             </Typography>
-            {slides[activeSlide].id == 6 && (
+            {slides[activeSlide].id === 6 && (
               <CameraComponent handleNext={handleNext} />
             )}
-            {slides[activeSlide].id == 8 && (
+            {slides[activeSlide].id === 8 && (
               <DocumentsForm countries={countries} addedFields={addedFields}/>
             )}
-            {slides[activeSlide].id == 9 && (
+            {slides[activeSlide].id === 9 && (
               <>
                 <Box sx={{ display: 'flex', alignItems: 'center', marginTop: '30px', justifyContent: 'center', backgroundColor: '#000000', width: '300px', height: '230px', borderRadius: '20px'}}>
                   <Iconify icon="uiw:warning" style={{ color: 'EE416F' }} />
@@ -431,7 +426,7 @@ const MobileCarousel = () => {
               </>
             )}
             {[10, 11, 15, 16].includes(slides[activeSlide].id) && (
-              <CameraComponent handleNext={handleNext} documentPic={true} increasedHeight={[15, 16].includes(slides[activeSlide].id)} screenID={slides[activeSlide].id} />
+              <CameraComponent handleNext={handleNext} documentPic increasedHeight={[15, 16].includes(slides[activeSlide].id)} screenID={slides[activeSlide].id} />
             )}
             {slides[activeSlide].id === 12 && (
               <Box display="flex" flexDirection="column" allignItems="center" justifyContent="center" width="100%">
@@ -457,7 +452,7 @@ const MobileCarousel = () => {
                   label="Wallet Address"
                   InputLabelProps={{ shrink: true }}
                 />
-                <Box sx={{ backgroundColor: '#000000', height: '200px', width: '200px', borderRadius: '8px', marginLeft: 'auto', marginRight: 'auto'}}></Box>
+                <Box sx={{ backgroundColor: '#000000', height: '200px', width: '200px', borderRadius: '8px', marginLeft: 'auto', marginRight: 'auto'}} />
               </Box>
             )}
             {slides[activeSlide].id === 18 && (
@@ -513,6 +508,6 @@ const MobileCarousel = () => {
       </Container>
     </>
   );
-};
+}
 
 export default MobileCarousel;
